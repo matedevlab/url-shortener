@@ -12,6 +12,15 @@ if ($LASTEXITCODE -ne 0) {
     exit
 }
 
+# Check if config.py already exists
+if (-Not (Test-Path "config.py")) {
+    # Generate a random secret key and create config.py in one line
+    "SECRET_KEY = b'$(python3 -c "import os; print(os.urandom(16))")'" | Out-File config.py
+    Write-Host "config.py created with a new secret key."
+} else {
+    Write-Host "config.py already exists. No changes made to it."
+}
+
 # Create a virtual environment
 python3 -m venv env
 
