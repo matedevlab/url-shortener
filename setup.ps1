@@ -14,8 +14,8 @@ if ($LASTEXITCODE -ne 0) {
 
 # Check if config.py already exists
 if (-Not (Test-Path "config.py")) {
-    # Generate a random secret key and create config.py in one line
-    "SECRET_KEY = b'$(python3 -c "import os; print(os.urandom(16))")'" | Out-File config.py
+    # Generate a more secure secret key and create config.py
+    "SECRET_KEY = '$(python3 -c "import secrets; print(secrets.token_urlsafe(24))")'" | Out-File config.py
     Write-Host "config.py created with a new secret key."
 } else {
     Write-Host "config.py already exists. No changes made to it."

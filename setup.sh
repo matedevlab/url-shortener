@@ -14,8 +14,8 @@ fi
 
 # Check if config.py already exists
 if [ ! -f "config.py" ]; then
-    # Generate a random secret key and create config.py in one line
-    echo "SECRET_KEY = b'$(python3 -c 'import os; print(os.urandom(16))')" > config.py
+    # Generate a more secure secret key and create config.py
+    echo "SECRET_KEY = '$(python3 -c "import secrets; print(secrets.token_urlsafe(24))")'" > config.py
     echo "config.py created with a new secret key."
 else
     echo "config.py already exists. No changes made to it."
