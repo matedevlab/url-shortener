@@ -12,9 +12,10 @@ from flask import (
 import json
 import os.path
 from werkzeug.utils import secure_filename
+import config
 
 app = Flask(__name__)
-app.secret_key = "agrhehrare3z43z5hge5v43243vr3"
+app.secret_key = config.SECRET_KEY
 
 
 @app.route("/")
