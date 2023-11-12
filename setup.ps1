@@ -12,13 +12,16 @@ if ($LASTEXITCODE -ne 0) {
     exit
 }
 
+# Define the path to the config.py file inside the shorturl directory
+$configFilePath = ".\shorturl\config.py"
+
 # Check if config.py already exists
-if (-Not (Test-Path "config.py")) {
-    # Generate a more secure secret key and create config.py
-    "SECRET_KEY = '$(python3 -c "import secrets; print(secrets.token_urlsafe(24))")'" | Out-File config.py
-    Write-Host "config.py created with a new secret key."
+if (-Not (Test-Path $configFilePath)) {
+    # Generate a more secure secret key and create config.py in the shorturl directory
+    "SECRET_KEY = '$(python3 -c "import secrets; print(secrets.token_urlsafe(24))")'" | Out-File $configFilePath
+    Write-Host "config.py created in the shorturl directory with a new secret key."
 } else {
-    Write-Host "config.py already exists. No changes made to it."
+    Write-Host "config.py already exists in the shorturl directory. No changes made to it."
 }
 
 # Create a virtual environment
