@@ -1,21 +1,24 @@
-# PowerShell script to set up a Python environment with pipenv and Flask
-
-# Check Python version
-$pythonVersion = python --version
-if ($pythonVersion -like "*Python 3*") {
-    Write-Host "Python 3 is detected: $pythonVersion"
-} else {
+# Check for Python 3
+$python3 = Get-Command python3 -ErrorAction SilentlyContinue
+if ($null -eq $python3) {
     Write-Host "Python 3 is not installed. Please install it first."
     exit
 }
 
-# Install pipenv
-Write-Host "Installing pipenv..."
-pip install --user pipenv
+# Check for venv module in Python 3
+$venvCheck = python3 -c "import venv"
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "venv module for Python 3 is not installed. Please install it first."
+    exit
+}
 
-# Install dependencies using pipenv
-Write-Host "Installing project dependencies..."
-pipenv install flask
+# Create a virtual environment
+python3 -m venv env
 
-# The script ends here. The user will need to activate the environment manually.
-Write-Host "Environment setup is complete. Please activate the environment using 'pipenv shell'."
+# Activate virtual environment
+& env/Scripts/Activate.ps1
+
+# Install dependencies from requirements.txt
+pip install -r requirements.txt
+
+Write-Host "Setup complete. Dependencies are installed."
