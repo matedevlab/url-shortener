@@ -7,4 +7,4 @@ if (-Not [String]::IsNullOrEmpty($env:VIRTUAL_ENV)) {
 }
 
 # Start Gunicorn with the specified configuration
-gunicorn -w 4 -b 0.0.0.0:8000 "urlshort:create_app()"
+gunicorn -w 4 -b 0.0.0.0:5000 "urlshort:create_app()"
