@@ -19,3 +19,8 @@ This repository houses a dynamic URL shortening service, designed to simplify lo
    2. Windows in PowerShell: `.\env\Scripts\Activate.ps1`
 
 3. Run the run.py file
+
+   1. From the root directory run `python3 run.py`
+
+4. If you want to run the test
+   1. From the root directory you can run `pytest` to run the tests
