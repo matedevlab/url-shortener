@@ -34,3 +34,7 @@ To run the tests, execute the test script from the root folder:
 - For Unix-like systems: `./run_tests.sh`
 - For Windows (using PowerShell): `.\run_tests.ps1`
   - Note: To run the PowerShell script, you may need to adjust your execution policy as mentioned above.
+
+## Note
+
+The `run.py` is for development purpose only, you dont have to do anything with it.
