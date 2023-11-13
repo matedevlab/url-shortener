@@ -6,7 +6,7 @@ endif %}{% endblock %} {% block main %}
   <input
     class="lead"
     id="new_url"
-    value="{{ url_for('redirect_to_url', code=code, _external=True) }}"
+    value="{{ url_for('urlshort.redirect_to_url', code=code, _external=True) }}"
     readonly
   />
   <p>
