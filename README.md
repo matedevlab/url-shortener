@@ -4,12 +4,12 @@ This repository houses a dynamic URL shortening service, designed to simplify lo
 
 ## Set up the project
 
-1. Runt the setup scripts:
+1. Runt the setup scripts in the temrinal form the root folder:
 
-   1. Unix-like system: `setup.sh`
-   2. Windows in PowerShell: `setup.ps1`
+   1. Unix-like system: `./setup.sh`
+   2. Windows in PowerShell: `.\setup.ps1`
 
-      - Before running the PowerShell script, ensure that the execution policy allows it:
+      - Before running the PowerShell scripts, ensure that the execution policy allows it:
 
         `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
 
@@ -22,5 +22,11 @@ This repository houses a dynamic URL shortening service, designed to simplify lo
 
    1. From the root directory run `python3 run.py`
 
-4. If you want to run the test
-   1. From the root directory you can run `pytest` to run the tests
+## Run the tests
+
+4. If you want to run the tests run these command in the terminal form the root folder
+
+   1. Unix-like system: `./run_tests.sh`
+   2. Windows in PowerShell: `.\run_tests.ps1`
+
+      Note: To run the PowerShell script, you may need to adjust your execution policy to allow the script to run. You can do this by running PowerShell as an administrator and executing: `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned`
