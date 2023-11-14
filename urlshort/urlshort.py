@@ -39,10 +39,9 @@ def your_url():
         else:
             f = request.files["file"]
             full_name = request.form["code"] + secure_filename(f.filename)
-            f.save(
-                "/home/mate/Freestyle_projetcs/url-shortener/urlshort/static/user_files/"
-                + full_name
-            )
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            save_path = os.path.join(script_dir, "static", "user_files", full_name)
+            f.save(save_path)
             urls[request.form["code"]] = {"file": full_name}
 
         with open("urls.json", "w") as url_file:
