@@ -47,10 +47,10 @@ if (-Not (Test-Path $configFilePath)) {
 }
 
 # Create a virtual environment
-python3 -m venv env
+python3 -m venv venv
 
 # Activate virtual environment
-& env/Scripts/Activate.ps1
+& venv/Scripts/Activate.ps1
 
 # Install dependencies from requirements.txt
 pip install -r requirements.txt
