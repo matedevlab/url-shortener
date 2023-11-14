@@ -12,16 +12,16 @@ if ! python3 -c "import venv" &> /dev/null; then
     exit 1
 fi
 
-# Define the path to the config.py file inside the shorturl directory
-configFilePath="./shorturl/config.py"
+# Define the path to the config.py file inside the urlshort directory
+configFilePath="urlshort/config.py"
 
-# Check if config.py already exists in the shorturl directory
+# Check if config.py already exists in the urlshort directory
 if [ ! -f "$configFilePath" ]; then
-    # Generate a more secure secret key and create config.py in the shorturl directory
+    # Generate a more secure secret key and create config.py in the urlshort directory
     echo "SECRET_KEY = '$(python3 -c "import secrets; print(secrets.token_urlsafe(24))")'" > $configFilePath
-    echo "config.py created in the shorturl directory with a new secret key."
+    echo "config.py created in the urlshort directory with a new secret key."
 else
-    echo "config.py already exists in the shorturl directory. No changes made to it."
+    echo "config.py already exists in the urlshort directory. No changes made to it."
 fi
 
 # Create a virtual environment
