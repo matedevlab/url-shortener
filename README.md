@@ -12,7 +12,7 @@ To set up the project, follow these steps:
      - Unix-like systems: Follow [Python's official guide](https://www.python.org/downloads/source/).
      - Windows: Download from [Python's official website](https://www.python.org/downloads/windows/).
    - Ensure the venv module is installed (usually comes with Python 3.5 and above).
-   - Install Nginx:
+   - Install Nginx (will be used as reverse proxy):
      - Unix-like systems: Use package managers like `apt` or `yum`. For example, on Ubuntu, run `sudo apt install nginx`.
      - Windows: Download and install from [Nginx for Windows](http://nginx.org/en/docs/windows.html).
 
