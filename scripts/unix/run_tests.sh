@@ -8,7 +8,6 @@ else
     echo "Virtual environment already active"
 fi
 
-
 # Adding the current directory (project root) to PYTHONPATH
 export PYTHONPATH=$PYTHONPATH:`pwd`
 
