@@ -11,7 +11,7 @@ To set up the project, follow these steps:
    - In a terminal from the root folder, execute the appropriate setup script based on your operating system:
      - For Unix-like systems: `./setup.sh`
      - For Windows (using PowerShell): `.\setup.ps1`
-       - Note: Before running the PowerShell script, ensure the execution policy allows script execution:
+       - **Note**: Before running the PowerShell script, ensure the execution policy allows script execution:
          ```powershell
          Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
          ```
@@ -23,18 +23,34 @@ To set up the project, follow these steps:
      - For Windows (using PowerShell): `.\venv\Scripts\Activate.ps1`
 
 3. **Run the Project**:
-   - Start the URL shortener service by running the corresponding script:
-     - For Unix-like systems: `./start_gunicorn.sh`
-     - For Windows (using PowerShell): `.\start_gunicorn.ps1`
+   - To start the URL shortener service, follow these steps:
+     1. Download and start Nginx.
+     2. Open the `/etc/nginx/sites-enabled/default` file and paste the following code into the `location /` block to proxy requests to your Gunicorn server:
+        ```nginx
+        location / {
+            proxy_pass http://127.0.0.1:8000;  # Gunicorn is on port 8000
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+        ```
+     3. For Unix-like systems: `./start_gunicorn.sh`
+     4. For Windows (using PowerShell): `.\start_gunicorn.ps1`
+
+## Stopping the Application
+
+To stop the application, use the following scripts:
+
+- For Unix-like systems: `./kill_gunicorn.sh`
+- For Windows (using PowerShell): `.\kill_gunicorn.ps1`
 
 ## Running Tests
 
-To run the tests, execute the test script from the root folder:
+Execute the test script from the root folder to run the tests:
 
 - For Unix-like systems: `./run_tests.sh`
 - For Windows (using PowerShell): `.\run_tests.ps1`
-  - Note: To run the PowerShell script, you may need to adjust your execution policy as mentioned above.
+  - **Note**: You may need to adjust your execution policy to run the PowerShell script, as mentioned above.
 
 ## Note
 
-The `run.py` is for development purpose only, you dont have to do anything with it.
+The `run.py` file is intended for development purposes only and does not need to be used for production deployments.
