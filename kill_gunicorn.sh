@@ -1,14 +1,17 @@
 #!/bin/bash
 
-# Find the PID of the Gunicorn master process for the specific project
-PID=$(ps aux | grep 'gunicorn' | grep 'urlshort:create_app()' | awk '{print $2}' | head -1)
+# Find all PIDs of Gunicorn processes for the specific project
+PIDS=$(ps aux | grep 'gunicorn -w 4 -b 0.0.0.0:8000 urlshort:create_app() --daemon' | awk '{print $2}')
 
-# Check if the process was found
-if [ -z "$PID" ]; then
-    echo "No Gunicorn master process found for the project."
+# Check if any Gunicorn processes were found
+if [ -z "$PIDS" ]; then
+    echo "No Gunicorn processes found for the project."
 else
-    # Kill the Gunicorn master process
-    echo "Killing Gunicorn master process with PID: $PID"
-    kill "$PID"
-    echo "Gunicorn master process has been terminated."
+    # Kill all Gunicorn processes
+    echo "Killing Gunicorn processes..."
+    for PID in $PIDS; do
+        kill "$PID"
+        echo "Killed Gunicorn process with PID: $PID"
+    done
+    echo "All Gunicorn processes have been terminated."
 fi
