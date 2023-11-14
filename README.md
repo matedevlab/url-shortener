@@ -25,7 +25,7 @@ To set up the project, follow these steps:
 3. **Run the Project**:
    - To start the URL shortener service, follow these steps:
      1. Download and start Nginx.
-     2. Open the `/etc/nginx/sites-enabled/default` file and paste the following code into the `location /` block to proxy requests to your Gunicorn server:
+     2. Open the `/etc/nginx/sites-enabled/default` file and edit the `location /` block to looke like this:
         ```nginx
         location / {
             proxy_pass http://127.0.0.1:8000;  # Gunicorn is on port 8000
