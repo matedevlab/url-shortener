@@ -12,6 +12,28 @@ if ($LASTEXITCODE -ne 0) {
     exit
 }
 
+# Check for Nginx
+$nginx = Get-Command nginx -ErrorAction SilentlyContinue
+if ($null -eq $nginx) {
+    Write-Host "Nginx is not installed. Please install Nginx manually."
+    exit
+}
+
+# Check if Nginx is running
+$nginxService = Get-Service -Name nginx -ErrorAction SilentlyContinue
+if ($null -eq $nginxService) {
+    Write-Host "Nginx service not found. Please ensure Nginx is installed."
+    exit
+} elseif ($nginxService.Status -ne "Running") {
+    Write-Host "Nginx is not running. Attempting to start Nginx..."
+    Start-Service nginx
+    $nginxService.Refresh()
+    if ($nginxService.Status -ne "Running") {
+        Write-Host "Failed to start Nginx. Please start Nginx manually."
+        exit
+    }
+}
+
 # Define the path to the config.py file inside the shorturl directory
 $configFilePath = ".\shorturl\config.py"
 
