@@ -64,7 +64,7 @@ To stop the application, use the following scripts:
 - Unix-like systems: `./scripts/unix/kill_gunicorn.sh`
 - Windows (using PowerShell): `.\scripts\windows\kill_gunicorn.ps1`
 
-## Running Tests
+## Running Tests (if you want)
 
 Execute the test script from the root folder to run the tests:
 
