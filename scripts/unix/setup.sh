@@ -1,16 +1,38 @@
 #!/bin/bash
 
+# Function to check if a command exists
+command_exists() {
+    command -v "$@" &> /dev/null
+}
+
 # Check for Python 3
-if ! command -v python3 &> /dev/null; then
-    echo "Python 3 is not installed. Please install it first."
+if ! command_exists python3; then
+    echo "Python 3 is not installed. Please install Python 3 manually."
     exit 1
 fi
 
 # Check for venv module in Python 3
 if ! python3 -c "import venv" &> /dev/null; then
-    echo "venv module for Python 3 is not installed. Please install it first."
+    echo "venv module for Python 3 is not installed. Please ensure Python 3 is correctly installed."
     exit 1
 fi
+
+# Check for Nginx
+if ! command_exists nginx; then
+    echo "Nginx is not installed. Please install Nginx manually."
+    exit 1
+fi
+
+# Check if Nginx is running
+if ! pgrep -x nginx &> /dev/null; then
+    echo "Nginx is not running. Attempting to start Nginx..."
+    sudo systemctl start nginx
+    if ! pgrep -x nginx &> /dev/null; then
+        echo "Failed to start Nginx. Please start Nginx manually."
+        exit 1
+    fi
+fi
+
 
 # Define the path to the config.py file inside the urlshort directory
 configFilePath="urlshort/config.py"
