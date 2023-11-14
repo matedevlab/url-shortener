@@ -10,11 +10,14 @@ To set up the project, follow these steps:
 
    - In a terminal from the root folder, execute the appropriate setup script based on your operating system:
      - For Unix-like systems: `./scripts/unix/setup.sh`
-     - For Windows (using PowerShell): `.\scripts\windows\setup.ps1`
-       - **Note**: Before running the PowerShell script, ensure the execution policy allows script execution:
-         ```powershell
-         Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-         ```
+     - For Windows (using PowerShell): `.\scripts\windows\setup.ps1` - **Note**: Before running the PowerShell script, ensure the execution policy allows script execution:
+     ```powershell
+       Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+     ```
+     **IF YOU DONT HAVE INSTALLED PYTHON3.10.12, THE ENV MODULE OR NGINX:**
+     1. Install python3.10.12
+     2. Install env module
+     3. Install nginx
 
 2. **Activate the Virtual Environment**:
 
