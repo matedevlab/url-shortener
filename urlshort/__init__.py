@@ -1,10 +1,14 @@
 from flask import Flask
-from .config import SECRET_KEY
+
+from . import config
 
 
 def create_app(test_config=None):
-    app = Flask(__name__)
-    app.secret_key = SECRET_KEY
+    app = Flask(__name__, instance_relative_config=True)
+    app.config.from_object(config)
+
+    if test_config is not None:
+        app.config.update(test_config)
 
     from . import urlshort
 

@@ -8,8 +8,8 @@ else
     echo "Virtual environment already active"
 fi
 
-# Adding the current directory (project root) to PYTHONPATH
-export PYTHONPATH=$PYTHONPATH:`pwd`
+# Ensure the application is importable without manual PYTHONPATH tweaks
+pip install -e .[dev]
 
 # Running pytest
 pytest

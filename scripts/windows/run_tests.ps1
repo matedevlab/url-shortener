@@ -6,8 +6,8 @@ if (-Not [String]::IsNullOrEmpty($env:VIRTUAL_ENV)) {
     .\venv\Scripts\Activate.ps1
 }
 
-# Adding the project root directory to PYTHONPATH
-$env:PYTHONPATH = "$env:PYTHONPATH;$(Get-Location)"
+# Ensure the application is importable without manual PYTHONPATH tweaks
+pip install -e .[dev]
 
 # Running pytest
 pytest
