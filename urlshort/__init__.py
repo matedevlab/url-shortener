@@ -4,7 +4,10 @@ from .config import SECRET_KEY
 
 def create_app(test_config=None):
     app = Flask(__name__)
-    app.secret_key = SECRET_KEY
+    app.config.from_mapping(SECRET_KEY=SECRET_KEY)
+
+    if test_config is not None:
+        app.config.update(test_config)
 
     from . import urlshort
 
