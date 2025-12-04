@@ -1,15 +1,20 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-# Check if the virtual environment is already activated
-if [ -z "$VIRTUAL_ENV" ]; then
-    echo "Activating virtual environment"
-    source venv/bin/activate
+# Try to activate a virtualenv if not already active
+if [ -z "${VIRTUAL_ENV:-}" ]; then
+  if [ -f "venv/bin/activate" ]; then
+    . venv/bin/activate
+  elif [ -f ".venv/bin/activate" ]; then
+    . .venv/bin/activate
+  fi
 else
-    echo "Virtual environment already active"
+  echo "Virtual environment already active"
 fi
 
-# Adding the current directory (project root) to PYTHONPATH
-export PYTHONPATH=$PYTHONPATH:`pwd`
+# Use venv's pip explicitly and ensure wheel/build tools are available
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install -e '.[dev]'
 
-# Running pytest
-pytest
+# Run pytest (forward any args)
+pytest "${@:-}"
